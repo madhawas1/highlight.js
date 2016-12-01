@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Highlight.js by madhawas1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Highlight.js</h1>
+      <h2 class="project-tagline">host highlight.js files</h2>
+      <a href="https://github.com/madhawas1/highlight.js" class="btn">View on GitHub</a>
+      <a href="https://github.com/madhawas1/highlight.js/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/madhawas1/highlight.js/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="highlightjs" class="anchor" href="#highlightjs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Highlight.js</h1>
+
+<p><a href="https://travis-ci.org/isagalaev/highlight.js"><img src="https://travis-ci.org/isagalaev/highlight.js.svg?branch=master" alt="Build Status"></a></p>
+
+<p>Highlight.js is a syntax highlighter written in JavaScript. It works in
+the browser as well as on the server. It works with pretty much any
+markup, doesn’t depend on any framework and has automatic language
+detection.</p>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>The bare minimum for using highlight.js on a web page is linking to the
+library along with one of the styles and calling
+<a href="http://highlightjs.readthedocs.io/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a>:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/styles/default.css<span class="pl-pds">"</span></span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/highlight.pack.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-smi">hljs</span>.<span class="pl-en">initHighlightingOnLoad</span>();&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<p>This will find and highlight code inside of <code>&lt;pre&gt;&lt;code&gt;</code> tags; it tries
+to detect the language automatically. If automatic detection doesn’t
+work for you, you can specify the language in the <code>class</code> attribute:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">pre</span>&gt;&lt;<span class="pl-ent">code</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>html<span class="pl-pds">"</span></span>&gt;...&lt;/<span class="pl-ent">code</span>&gt;&lt;/<span class="pl-ent">pre</span>&gt;</pre></div>
+
+<p>The list of supported language classes is available in the <a href="http://highlightjs.readthedocs.io/en/latest/css-classes-reference.html">class
+reference</a>.  Classes can also be prefixed with either <code>language-</code> or
+<code>lang-</code>.</p>
+
+<p>To disable highlighting altogether use the <code>nohighlight</code> class:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">pre</span>&gt;&lt;<span class="pl-ent">code</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>nohighlight<span class="pl-pds">"</span></span>&gt;...&lt;/<span class="pl-ent">code</span>&gt;&lt;/<span class="pl-ent">pre</span>&gt;</pre></div>
+
+<h2>
+<a id="custom-initialization" class="anchor" href="#custom-initialization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Custom Initialization</h2>
+
+<p>When you need a bit more control over the initialization of
+highlight.js, you can use the <a href="http://highlightjs.readthedocs.io/en/latest/api.html#highlightblock-block"><code>highlightBlock</code></a> and <a href="http://highlightjs.readthedocs.io/en/latest/api.html#configure-options"><code>configure</code></a>
+functions. This allows you to control <em>what</em> to highlight and <em>when</em>.</p>
+
+<p>Here’s an equivalent way to calling <a href="http://highlightjs.readthedocs.io/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a> using
+jQuery:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-c1">document</span>).<span class="pl-en">ready</span>(<span class="pl-k">function</span>() {
+  <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>pre code<span class="pl-pds">'</span></span>).<span class="pl-en">each</span>(<span class="pl-k">function</span>(<span class="pl-smi">i</span>, <span class="pl-smi">block</span>) {
+    <span class="pl-smi">hljs</span>.<span class="pl-en">highlightBlock</span>(block);
+  });
+});</pre></div>
+
+<p>You can use any tags instead of <code>&lt;pre&gt;&lt;code&gt;</code> to mark up your code. If
+you don't use a container that preserve line breaks you will need to
+configure highlight.js to use the <code>&lt;br&gt;</code> tag:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">hljs</span>.<span class="pl-en">configure</span>({useBR<span class="pl-k">:</span> <span class="pl-c1">true</span>});
+
+<span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>div.code<span class="pl-pds">'</span></span>).<span class="pl-en">each</span>(<span class="pl-k">function</span>(<span class="pl-smi">i</span>, <span class="pl-smi">block</span>) {
+  <span class="pl-smi">hljs</span>.<span class="pl-en">highlightBlock</span>(block);
+});</pre></div>
+
+<p>For other options refer to the documentation for <a href="http://highlightjs.readthedocs.io/en/latest/api.html#configure-options"><code>configure</code></a>.</p>
+
+<h2>
+<a id="web-workers" class="anchor" href="#web-workers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Web Workers</h2>
+
+<p>You can run highlighting inside a web worker to avoid freezing the browser
+window while dealing with very big chunks of code.</p>
+
+<p>In your main script:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-en">addEventListener</span>(<span class="pl-s"><span class="pl-pds">'</span>load<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>() {
+  <span class="pl-k">var</span> code <span class="pl-k">=</span> <span class="pl-c1">document</span>.<span class="pl-c1">querySelector</span>(<span class="pl-s"><span class="pl-pds">'</span>#code<span class="pl-pds">'</span></span>);
+  <span class="pl-k">var</span> worker <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Worker</span>(<span class="pl-s"><span class="pl-pds">'</span>worker.js<span class="pl-pds">'</span></span>);
+  <span class="pl-smi">worker</span>.<span class="pl-en">onmessage</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-c1">event</span>) { <span class="pl-smi">code</span>.<span class="pl-smi">innerHTML</span> <span class="pl-k">=</span> <span class="pl-c1">event</span>.<span class="pl-c1">data</span>; }
+  <span class="pl-smi">worker</span>.<span class="pl-c1">postMessage</span>(<span class="pl-smi">code</span>.<span class="pl-smi">textContent</span>);
+})</pre></div>
+
+<p>In worker.js:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-en">onmessage</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-c1">event</span>) {
+  <span class="pl-en">importScripts</span>(<span class="pl-s"><span class="pl-pds">'</span>&lt;path&gt;/highlight.pack.js<span class="pl-pds">'</span></span>);
+  <span class="pl-k">var</span> result <span class="pl-k">=</span> <span class="pl-smi">self</span>.<span class="pl-smi">hljs</span>.<span class="pl-en">highlightAuto</span>(<span class="pl-c1">event</span>.<span class="pl-c1">data</span>);
+  <span class="pl-en">postMessage</span>(<span class="pl-smi">result</span>.<span class="pl-c1">value</span>);
+}</pre></div>
+
+<h2>
+<a id="getting-the-library" class="anchor" href="#getting-the-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting the Library</h2>
+
+<p>You can get highlight.js as a hosted, or custom-build, browser script or
+as a server module. Right out of the box the browser script supports
+both AMD and CommonJS, so if you wish you can use RequireJS or
+Browserify without having to build from source. The server module also
+works perfectly fine with Browserify, but there is the option to use a
+build specific to browsers rather than something meant for a server.
+Head over to the <a href="https://highlightjs.org/download/">download page</a> for all the options.</p>
+
+<p><strong>Don't link to GitHub directly.</strong> The library is not supposed to work straight
+from the source, it requires building. If none of the pre-packaged options
+work for you refer to the <a href="http://highlightjs.readthedocs.io/en/latest/building-testing.html">building documentation</a>.</p>
+
+<p><strong>The CDN-hosted package doesn't have all the languages.</strong> Otherwise it'd be
+too big. If you don't see the language you need in the <a href="https://highlightjs.org/download/">"Common" section</a>,
+it can be added manually:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<p><strong>On Almond.</strong> You need to use the optimizer to give the module a name. For
+example:</p>
+
+<pre><code>r.js -o name=hljs paths.hljs=/path/to/highlight out=highlight.js
+</code></pre>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>Highlight.js is released under the BSD License. See <a href="https://github.com/isagalaev/highlight.js/blob/master/LICENSE">LICENSE</a> file
+for details.</p>
+
+<h2>
+<a id="links" class="anchor" href="#links" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Links</h2>
+
+<p>The official site for the library is at <a href="https://highlightjs.org/">https://highlightjs.org/</a>.</p>
+
+<p>Further in-depth documentation for the API and other topics is at
+<a href="http://highlightjs.readthedocs.io/">http://highlightjs.readthedocs.io/</a>.</p>
+
+<p>Authors and contributors are listed in the <a href="https://github.com/isagalaev/highlight.js/blob/master/AUTHORS.en.txt">AUTHORS.en.txt</a> file.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/madhawas1/highlight.js">Highlight.js</a> is maintained by <a href="https://github.com/madhawas1">madhawas1</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
